@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <style>
+            .cover{
+                max-width: 100%;
+                max-height: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <img id="img" class="cover">
+
+        <script>
+            let ws = new WebSocket('ws://localhost:8080');
+            let img = document.querySelector('#img');
+
+            ws.onmessage = t => {
+                let msg = JSON.parse(t.data);
+
+                if(msg.type === 'screen'){
+                    img.src = 'http://localhost:8081/screen?'+Math.random().toString().replace('0.', '');
+                }
+            }
+        </script>
+    </body>
+</html>
